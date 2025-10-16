@@ -1,7 +1,9 @@
-import React from 'react'
-import {motion} from "framer-motion"
+import React from "react";
+import { motion } from "framer-motion";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
-const Navbar = ({menuOpen, setMenuOpen}) => {
+const Navbar = ({ menuOpen, setMenuOpen }) => {
   return (
     <>
       {menuOpen && (
@@ -19,15 +21,20 @@ const Navbar = ({menuOpen, setMenuOpen}) => {
             ✕ Close
           </button>
 
-          <a href="#slider" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Home</a>
-          <a href="#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Content</a>
-          <a href="#product" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Product</a>
-          <a href="#brand" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Brand</a>
-          <a href="#footer" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</a>
+          {/* Single Page Scroll Links */}
+          <HashLink smooth to="/#slider" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Home</HashLink>
+          <HashLink smooth to="/#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Content</HashLink>
+          <HashLink smooth to="/#product" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Product</HashLink>
+          <HashLink smooth to="/#brand" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Brand</HashLink>
+          <HashLink smooth to="/#footer" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</HashLink>
+
+          {/* Multi-Page Navigation */}
+          <Link to="/collection" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Collection</Link>
+          <Link to="/cart" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Cart</Link>
         </motion.div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdShoppingCartCheckout } from "react-icons/md";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const Header = () => {
@@ -17,19 +19,21 @@ const Header = () => {
 
         {/* Desktop Navbar */}
         <div className="hidden md:flex gap-6 font-poppins text-gray-700">
-          <a href="#slider" className="hover:text-blue-600">Home</a>
-          <a href="#content" className="hover:text-blue-600">Content</a>
-          <a href="#product" className="hover:text-blue-600">Product</a>
-          <a href="#brand" className="hover:text-blue-600">Brand</a>
-          <a href="#footer" className="hover:text-blue-600">Contact</a>
+          <HashLink smooth to="/#slider">Home</HashLink>
+          <HashLink smooth to="/#content">Content</HashLink>
+          <HashLink smooth to="/#product">Product</HashLink>
+          <HashLink smooth to="/#brand">Brand</HashLink>
+          <HashLink smooth to="/#footer">Contact</HashLink>
+          <Link to="/collection">Collection</Link>
+          <Link to="/cart">Cart</Link>
         </div>
 
         {/* Icons Section */}
         <div className="flex gap-3 text-gray-700">
           <IoSearchSharp className="text-2xl cursor-pointer" />
-          <MdShoppingCartCheckout className="text-2xl cursor-pointer" />
-
-          {/* Mobile Menu Icon */}
+          <Link to="/cart">
+            <MdShoppingCartCheckout className="text-2xl cursor-pointer" />
+          </Link>
           <RiBarChartHorizontalLine
             className="text-2xl md:hidden cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}

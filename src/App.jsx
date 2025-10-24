@@ -8,8 +8,12 @@ import Brand from "./Components/Brand";
 import Footer from "./Components/Footer";
 import Collection from "./Components/Collection";
 import Cart from "./Components/Cart";
+import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
+
+  const [cartItems, setCartItems] = useState([])
   return (
     <BrowserRouter>
       {/* Top Shipping Bar */}
@@ -19,8 +23,8 @@ function App() {
           Free Shipping for orders over &#8377;500
         </p>
       </div>
-
-      <Header />
+      <ToastContainer position="top-center" autoClose="2000"/>
+      <Header cartItems={cartItems}/>
 
       {/* Define All Routes */}
       <Routes>
@@ -39,8 +43,8 @@ function App() {
         />
 
         {/* Other Pages */}
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/collection" element={<Collection cartItems={cartItems} setCartItems={setCartItems} />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems}/>} />
       </Routes>
     </BrowserRouter>
   );

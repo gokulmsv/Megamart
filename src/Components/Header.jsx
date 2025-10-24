@@ -6,7 +6,7 @@ import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
-const Header = () => {
+const Header = ({cartItems}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ const Header = () => {
 
         {/* Desktop Navbar */}
         <div className="hidden md:flex gap-6 font-poppins text-gray-700">
-          <HashLink smooth to="/#slider">Home</HashLink>
+          <HashLink smooth to="/">Home</HashLink>
           <HashLink smooth to="/#content">Content</HashLink>
           <HashLink smooth to="/#product">Product</HashLink>
           <HashLink smooth to="/#brand">Brand</HashLink>
@@ -29,10 +29,10 @@ const Header = () => {
         </div>
 
         {/* Icons Section */}
-        <div className="flex gap-3 text-gray-700">
+        <div className="relative flex gap-3 text-gray-700">
           <IoSearchSharp className="text-2xl cursor-pointer" />
           <Link to="/cart">
-            <MdShoppingCartCheckout className="text-2xl cursor-pointer" />
+            <MdShoppingCartCheckout className="text-2xl cursor-pointer" /> <span className="absolute right-7 -my-10 text-lg text-red-400 font-medium">{cartItems.length}</span>
           </Link>
           <RiBarChartHorizontalLine
             className="text-2xl md:hidden cursor-pointer"

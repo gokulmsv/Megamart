@@ -9,7 +9,7 @@ const Slider = () => {
   useEffect(() => {
     const setIntervalId = setInterval(() =>{
       setIsToggled((prevIsToggled) => !prevIsToggled)
-    }, 3000)
+    }, 5000)
     return () => clearInterval(setIntervalId)
   }, [])
 
@@ -19,8 +19,8 @@ const Slider = () => {
         {isToggled ? (
           
           <div className="relative">
-            <img src={slider1} className="w-[90%] h-[200px] pl-10 my-2 lg:w-[50%] lg:mx-80" alt="" />
-            <p className="absolute right-14 top-34 text-2xl text-red-500 md:absolute md:right-28 lg:right-2/6">50% offer</p>
+            <img src={slider1} className="w-[90%] h-[200px] pl-10 lg:w-[50%] lg:mx-80 lg:p-2 lg:h-[300px]" alt="" />
+            <p className="absolute right-14 top-34 text-3xl font-bold text-red-500 md:absolute md:right-28 lg:right-2/6 lg:my-20">50% offer</p>
           </div>
           
         ) : (

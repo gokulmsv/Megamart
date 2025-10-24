@@ -31,7 +31,7 @@ const Cart = ({ cartItems, setCartItems }) => {
   };
 
   const handleCheckout = () => {
-    toast.success("Checkout Successfully!");
+    toast.success("Checkout Successfully");
   };
 
   const handleIncrease = (targetId) => {

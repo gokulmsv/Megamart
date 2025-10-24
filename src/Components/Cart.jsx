@@ -30,6 +30,10 @@ const Cart = ({ cartItems, setCartItems }) => {
     toast.info("Removed item from cart");
   };
 
+  const handleCheckout = () => {
+    toast.success("Checkout Successfully!");
+  };
+
   const handleIncrease = (targetId) => {
     setCartItems((items) =>
       items.map((item) => {
@@ -83,6 +87,7 @@ const Cart = ({ cartItems, setCartItems }) => {
     );
   };
 
+  
   const totalAmount = cartItems.reduce((sum, item) => {
     const price = getField(item, "price") ?? 0;
     const qty = item.quantity ?? (item.data && item.data.quantity) ?? 1;
@@ -169,7 +174,7 @@ const Cart = ({ cartItems, setCartItems }) => {
           </div>
 
           {/* Checkout Button */}
-          <button className="mt-4 bg-teal-700 text-white px-6 py-3 rounded-lg hover:bg-teal-800 cursor-pointer">
+          <button onClick={handleCheckout} className="mt-4 bg-teal-700 text-white px-6 py-3 rounded-lg hover:bg-teal-800 cursor-pointer">
             Proceed to Checkout
           </button>
         </>

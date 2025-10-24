@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import Header from "./Components/Header";
 import Slider from "./Components/Slider";

@@ -1,4 +1,4 @@
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { GiCardboardBoxClosed } from "react-icons/gi";
 import Header from "./Components/Header";
 import Slider from "./Components/Slider";
@@ -9,13 +9,14 @@ import Footer from "./Components/Footer";
 import Collection from "./Components/Collection";
 import Cart from "./Components/Cart";
 import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
   const [cartItems, setCartItems] = useState([])
+
   return (
-    <BrowserRouter>
+    <Router>
       {/* Top Shipping Bar */}
       <div className="flex bg-black text-white items-center justify-center">
         <GiCardboardBoxClosed className="h-12 w-8" />
@@ -23,12 +24,12 @@ function App() {
           Free Shipping for orders over &#8377;500
         </p>
       </div>
-      <ToastContainer position="top-center" autoClose="2000"/>
-      <Header cartItems={cartItems}/>
 
-      {/* Define All Routes */}
+      <ToastContainer position="top-center" autoClose="2000" />
+      <Header cartItems={cartItems} />
+
+      {/* Routes */}
       <Routes>
-        {/* Home Page with Scroll Sections */}
         <Route
           path="/"
           element={
@@ -42,11 +43,10 @@ function App() {
           }
         />
 
-        {/* Other Pages */}
         <Route path="/collection" element={<Collection cartItems={cartItems} setCartItems={setCartItems} />} />
-        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems}/>} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

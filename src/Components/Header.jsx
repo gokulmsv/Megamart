@@ -32,7 +32,7 @@ const Header = ({cartItems}) => {
         <div className="relative flex gap-3 text-gray-700">
           <IoSearchSharp className="text-2xl cursor-pointer" />
           <Link to="/cart">
-            <MdShoppingCartCheckout className="text-2xl cursor-pointer" /> <span className="absolute right-7 -my-10 text-lg text-red-400 font-medium">{cartItems.length}</span>
+            <MdShoppingCartCheckout className="text-2xl cursor-pointer" /> <span className="absolute right-7 -my-10 text-lg text-red-400 font-medium lg:-right-2">{cartItems.length}</span>
           </Link>
           <RiBarChartHorizontalLine
             className="text-2xl md:hidden cursor-pointer"

@@ -7,7 +7,7 @@ const Collection = ({ cartItems, setCartItems }) => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetch("http://localhost:3000/products")
+    fetch("/api/products")
       .then((response) => response.json())
       .then((data) => {
         setData(data.products || data); // handle if JSON has {products: [...]}

@@ -1,4 +1,6 @@
 import React from "react";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,24 +13,19 @@ const Footer = () => {
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="../Components/Header.jsx" className=" hover:underline">
-                    HOME
-                </a>
+                 <HashLink smooth to="/">Home</HashLink>
               </li>
               <li className="mb-4">
-                <a href="../Components/Product.jsx" className="hover:underline">
-                  NEW PRODUCT
-                </a>
+                <HashLink smooth to="/#content">New Arrivals</HashLink>
               </li>
               <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  CONTACT US
-                </a>
+                <HashLink smooth to="/#Contact">Contact</HashLink>
               </li>
               <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Blog
-                </a>
+                <Link to="/collection">Collection</Link>
+              </li>
+              <li className="mb-4">
+                <Link to="/cart">Cart</Link>
               </li>
             </ul>
           </div>

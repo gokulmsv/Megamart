@@ -20,7 +20,7 @@ const Header = ({cartItems}) => {
         {/* Desktop Navbar */}
         <div className="hidden md:flex gap-6 font-poppins text-gray-700">
           <HashLink smooth to="/">Home</HashLink>
-          <HashLink smooth to="/#content">Content</HashLink>
+          <HashLink smooth to="/#content">New Arrivals</HashLink>
           <HashLink smooth to="/#product">Product</HashLink>
           <HashLink smooth to="/#brand">Brand</HashLink>
           <HashLink smooth to="/#footer">Contact</HashLink>

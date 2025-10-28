@@ -23,7 +23,7 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
 
           {/* Single Page Scroll Links */}
           <HashLink smooth to="/#slider" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Home</HashLink>
-          <HashLink smooth to="/#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Content</HashLink>
+          <HashLink smooth to="/#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">New Arrivals</HashLink>
           <HashLink smooth to="/#product" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Product</HashLink>
           <HashLink smooth to="/#brand" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Brand</HashLink>
           <HashLink smooth to="/#footer" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</HashLink>

@@ -17,13 +17,14 @@ const Cart = ({ cartItems, setCartItems }) => {
     if (item.data && item.data[key] !== undefined) return item.data[key];
     return undefined;
   };
-
-  // helper to get canonical id
+                                                                                     
+  // helper to get canonical id 
   const getId = (item) =>
     getField(item, "id") ??
     getField(item, "_id") ??
     getField(item, "sku") ??
     "";
+    
 
   const handleRemove = (targetId) => {
     setCartItems((items) => items.filter((item) => getId(item) !== targetId));

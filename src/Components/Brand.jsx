@@ -10,7 +10,7 @@ const Brand = () => {
   return (
     <>
       <section className="font-poppins p-6">
-        <h2>TOP BRANDS</h2>
+        <h2 className="text-xl font-bold">TOP BRANDS</h2>
         <div className="grid grid-cols-2 gap-2 p-3 my-4 justify-between transition-all duration-300 sm:grid-cols-3 md:flex lg:overflow-hidden scroll-auto">
           <img
             className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"

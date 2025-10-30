@@ -51,18 +51,18 @@ const Product = () => {
   return (
     <>
       <section className="p-4 relative font-poppins">
-        <h1 className="absolute text-xl font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-black after:origin-center after:scale-0 after:opacity-100 after:transition-transform after:duration-500 hover:after:scale-70 focus:after:scale-100">
+        <h1 className="absolute text-xl font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-black after:origin-center after:scale-0 after:opacity-100 after:transition-transform after:duration-500  focus:after:scale-100">
           New Products
         </h1>
         
-        <ul className="my-8 flex justify-between items-center">
+        <ul className="my-8 flex gap-4 items-center text-black ">
         {["all", "men", "women", "kids", "accessories", "cosmetics"].map(
           (category) => (
             <li
               key={category}
               onClick={() => setShowImages(category)}
-              className={`cursor-pointer hover:underline hover:underline-offset-8 hover:decoration-2 ${
-                showImages === category ? "font-bold underline" : ""
+              className={`cursor-pointer hover:border-solid hover:border hover:rounded-2xl hover:p-2 ${
+                showImages === category ? "" : ""
               }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}

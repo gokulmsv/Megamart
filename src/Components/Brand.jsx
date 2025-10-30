@@ -13,32 +13,32 @@ const Brand = () => {
         <h2>TOP BRANDS</h2>
         <div className="grid grid-cols-2 gap-2 p-3 my-4 justify-between transition-all duration-300 sm:grid-cols-3 md:flex lg:overflow-hidden scroll-auto">
           <img
-            className="w-32 h-20 flex items-center justify-center bg- rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b1}
             alt=""
           />
           <img
-            className="w-32 h-20 flex items-center justify-center bg-grey-300 rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b2}
             alt=""
           />
           <img
-            className="w-32 h-20 flex items-center justify-center bg-grey-300 rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b3}
             alt=""
           />
           <img
-            className="w-32 h-20 flex items-center justify-center bg-grey-300 rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b4}
             alt=""
           />
           <img
-            className="w-32 h-20 flex items-center justify-center bg-grey-300 rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b5}
             alt=""
           />
           <img
-            className="w-32 h-20 flex items-center justify-center bg-grey-300 rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
+            className="w-32 h-20 flex items-center justify-center bg-white rounded-xl shadow-md p-4 hover:scale-110 transition-transform duration-300"
             src={b6}
             alt=""
           />

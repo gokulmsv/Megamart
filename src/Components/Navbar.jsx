@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
+import { RiBarChartHorizontalLine } from "react-icons/ri";
 
 const Navbar = ({ menuOpen, setMenuOpen }) => {
   return (
@@ -26,11 +27,12 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
           <HashLink smooth to="/#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">New Arrivals</HashLink>
           <HashLink smooth to="/#product" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Product</HashLink>
           <HashLink smooth to="/#brand" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Brand</HashLink>
-          <HashLink smooth to="/#footer" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</HashLink>
+          <HashLink smooth to="/#contact" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</HashLink>
 
           {/* Multi-Page Navigation */}
           <Link to="/collection" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Collection</Link>
-          <Link to="/cart" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Cart</Link>
+          <Link to="/Login" onClick={() => setMenuOpen(false)}>Login</Link>
+          <button className=" bg-teal-700 h-10 w-20 ml-16 rounded-lg ring-offset-2 text-white"><Link to="/Signup" onClick={() => setMenuOpen(false)}>Signup </Link></button>
         </motion.div>
       )}
     </>

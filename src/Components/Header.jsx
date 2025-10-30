@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
-import { IoSearchSharp } from "react-icons/io5";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { HashLink } from "react-router-hash-link";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { FaHeart } from "react-icons/fa";
+import { UserAuth } from "../Context/AuthContext";
 
-const Header = ({cartItems}) => {
+const Header = ({ cartItems }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = UserAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (err) {
+      console.error("Logout failed:", err.message);
+    }
+  };
 
   return (
     <>
@@ -23,17 +33,43 @@ const Header = ({cartItems}) => {
           <HashLink smooth to="/#content">New Arrivals</HashLink>
           <HashLink smooth to="/#product">Product</HashLink>
           <HashLink smooth to="/#brand">Brand</HashLink>
-          <HashLink smooth to="/#footer">Contact</HashLink>
+          <HashLink smooth to="/#contact">Contact</HashLink>
           <Link to="/collection">Collection</Link>
-          <Link to="/cart">Cart</Link>
         </div>
 
-        {/* Icons Section */}
-        <div className="relative flex gap-3 text-gray-700">
-          <IoSearchSharp className="text-2xl cursor-pointer" />
-          <Link to="/cart">
-            <MdShoppingCartCheckout className="text-2xl cursor-pointer" /> <span className="absolute right-7 -my-10 text-lg text-red-400 font-medium lg:-right-2">{cartItems.length}</span>
+        {/* Icons + Auth Section */}
+        <div className="relative flex items-center gap-3 text-gray-700">
+          <Link to="/wishlist"><FaHeart size={24}/></Link>
+          <Link to="/cart" className="relative">
+            <MdShoppingCartCheckout className="text-2xl cursor-pointer" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-3 -right-3 text-sm bg-red-500 text-white rounded-full px-1.5">
+                {cartItems.length}
+              </span>
+            )}
           </Link>
+
+          {/* If user logged in → show name + logout */}
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium text-gray-800">
+                {user.displayName || user.email.split("@")[0]}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 h-8 px-3 rounded-lg text-white text-sm hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            // If not logged in → show Signin button
+            <button className="hidden md:block bg-teal-700 h-8 w-20 ml-8 rounded-lg text-white hover:bg-teal-800">
+              <Link to="/Login">Signin</Link>
+            </button>
+          )}
+
+          {/* Menu Icon (Mobile) */}
           <RiBarChartHorizontalLine
             className="text-2xl md:hidden cursor-pointer"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -41,7 +77,7 @@ const Header = ({cartItems}) => {
         </div>
       </div>
 
-      {/* Side Navbar (Mobile) */}
+      {/* Mobile Sidebar */}
       <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
     </>
   );

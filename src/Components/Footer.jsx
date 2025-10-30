@@ -19,7 +19,7 @@ const Footer = () => {
                 <HashLink smooth to="/#content">New Arrivals</HashLink>
               </li>
               <li className="mb-4">
-                <HashLink smooth to="/#Contact">Contact</HashLink>
+                <HashLink smooth to="/#contact">Contact</HashLink>
               </li>
               <li className="mb-4">
                 <Link to="/collection">Collection</Link>
@@ -50,9 +50,7 @@ const Footer = () => {
                 </a>
               </li>
               <li className="mb-4">
-                <a href="#" className="hover:underline">
-                  Contact Us
-                </a>
+                <HashLink className="hover:underline" smooth to="/#contact">Contact</HashLink>
               </li>
             </ul>
           </div>

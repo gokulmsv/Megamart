@@ -1,12 +1,11 @@
 // src/pages/Signup.jsx
 import { useState } from "react";
-import { UserAuth } from "../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import signupimg from "../assets/s-1.jpg";
-import { ToastContainer, toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 export default function Signup() {
-  const { signup } = UserAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,16 +16,22 @@ export default function Signup() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.info("Passwords do not match");
       return;
     }
 
-    try {
-      await signup(email, password, name); // pass name here
-      navigate("/collection");
-    } catch (err) {
-      alert(err.message);
-    }
+    // ✅ Generate unique user ID
+    const userId = uuidv4();
+
+    // ✅ Store user data
+    const newUser = { id: userId, name, email, password };
+    localStorage.setItem(email, JSON.stringify(newUser));
+
+    // ✅ Also mark as active user
+    localStorage.setItem("activeUser", JSON.stringify(newUser));
+
+    toast.success("Signup successful");
+    navigate("/collection");
   };
 
   return (
@@ -35,7 +40,7 @@ export default function Signup() {
         {/* Left Side Image */}
         <div className="md:w-1/2 hidden md:block">
           <img
-            src={signupImg}
+            src={signupimg}
             alt="Signup"
             className="w-full h-full object-cover"
           />
@@ -55,27 +60,38 @@ export default function Signup() {
               type="text"
               placeholder="Full Name"
               className="w-full p-2 border rounded"
+              value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <input
               type="email"
               placeholder="Email"
               className="w-full p-2 border rounded"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <input
               type="password"
               placeholder="Password"
               className="w-full p-2 border rounded"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <input
               type="password"
               placeholder="Confirm Password"
               className="w-full p-2 border rounded"
+              value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
-            <button className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 mt-2">
+            <button
+              type="submit"
+              className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 mt-2"
+            >
               Signup
             </button>
           </form>

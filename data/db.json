@@ -239,6 +239,67 @@
       "rate": 3.6,
       "count": 145
     }
+  },
+  {
+  "id": 21,
+  "title": "Baggy Pants",
+  "price": 109.95,
+  "description": "Baggy clothes are loose-fitting. Sometimes kids wear their pants so baggy that their legs look like toothpicks in a lunch bag.",
+  "category": "Men",
+  "image": "/Baggy pants.jpg",
+  "rating": {
+    "rate": 3.9,
+    "count": 120
+  }
+}
+,
+  {
+    "id": 22,
+    "title": "Casual-Pants",
+    "price": 109.95,
+    "description": "Casual wear is comfortable, informal clothing suitable for relaxed settings like everyday errands or leisure activities.",
+    "category": "Men",
+    "image": "/Casual Suit Pants.jpg",
+    "rating": {
+      "rate": 4.0,
+      "count": 120
+    }
+  },
+  {
+    "id": 23,
+    "title": "Cotton Linean Shirts",
+    "price": 109.95,
+    "description": " Linen shirts are well known for high durability.",
+    "category": "Men",
+    "image": "/Cotton Linen Shirts.jpg",
+    "rating": {
+      "rate": 4.2,
+      "count": 120
+    }
+  },
+  {
+    "id": 24,
+    "title": "Denim Jeans Pants",
+    "price": 109.95,
+    "description": "Denim is a sturdy cotton twill fabric woven with an indigo, gray, or mottled white yarn.",
+    "category": "All",
+    "image": "/Denim Jeans Pants.jpg",
+    "rating": {
+      "rate": 3.0,
+      "count": 120
+    }
+  },
+  {
+    "id": 25,
+    "title": "Herren Sommer T-Shirt mit",
+    "price": 109.95,
+    "description": "T-shirts are typically made of cotton textile in a stockinette or jersey knit, which has a distinctively pliable texture compared to shirts made of woven cloth",
+    "category": "Men",
+    "image": "/Herren Sommer T-Shirt mit.jpg",
+    "rating": {
+      "rate": 3.9,
+      "count": 120
+    }
   }
 ]
 }

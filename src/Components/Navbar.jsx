@@ -23,16 +23,55 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
           </button>
 
           {/* Single Page Scroll Links */}
-          <HashLink smooth to="/#slider" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Home</HashLink>
-          <HashLink smooth to="/#content" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">New Arrivals</HashLink>
-          <HashLink smooth to="/#product" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Product</HashLink>
-          <HashLink smooth to="/#brand" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Brand</HashLink>
-          <HashLink smooth to="/#contact" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Contact</HashLink>
+          <HashLink
+            smooth
+            to="/#slider"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Home
+          </HashLink>
+          <HashLink
+            smooth
+            to="/#content"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            New Arrivals
+          </HashLink>
+          <HashLink
+            smooth
+            to="/#product"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Product
+          </HashLink>
+          <HashLink
+            smooth
+            to="/#brand"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Brand
+          </HashLink>
+          <HashLink
+            smooth
+            to="/#contact"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Contact
+          </HashLink>
 
           {/* Multi-Page Navigation */}
-          <Link to="/collection" onClick={() => setMenuOpen(false)} className="hover:text-blue-600">Collection</Link>
-          <Link to="/Login" onClick={() => setMenuOpen(false)}>Login</Link>
-          <button className=" bg-teal-700 h-10 w-20 ml-16 rounded-lg ring-offset-2 text-white"><Link to="/Signup" onClick={() => setMenuOpen(false)}>Signup </Link></button>
+          <Link
+            to="/collection"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Collection
+          </Link>
         </motion.div>
       )}
     </>

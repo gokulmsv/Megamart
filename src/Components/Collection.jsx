@@ -8,11 +8,28 @@ const Collection = ({ cartItems, setCartItems }) => {
   const [filtered, setFiltered] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
-  const [liked, setLiked] = useState(
-    JSON.parse(localStorage.getItem("likedProducts")) || {}
-  );
+  const [liked, setLiked] = useState({});
 
-  // Fetch products
+  // ✅ Get current active user
+  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
+  const userId = activeUser?.id;
+
+  // ✅ Use user-specific storage keys
+  const wishlistKey = `${userId}_wishlist`;
+  const cartKey = `${userId}_cart`;
+  const likedKey = `${userId}_likedProducts`;
+
+  // ✅ Load user data from localStorage when component mounts
+  useEffect(() => {
+    const savedWishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+    const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    const savedLiked = JSON.parse(localStorage.getItem(likedKey)) || {};
+
+    setCartItems(savedCart);
+    setLiked(savedLiked);
+  }, [userId]); // reload if user changes
+
+  // ✅ Fetch products from backend
   useEffect(() => {
     fetch("http://localhost:3000/products")
       .then((res) => res.json())
@@ -23,44 +40,59 @@ const Collection = ({ cartItems, setCartItems }) => {
       });
   }, []);
 
-  // Toggle wishlist
+  // ✅ Toggle wishlist (like/unlike)
   const toggleLike = (product) => {
     setLiked((prevLiked) => {
       const isLiked = !!prevLiked[product.id];
       const updatedLiked = { ...prevLiked, [product.id]: !isLiked };
-      localStorage.setItem("likedProducts", JSON.stringify(updatedLiked));
 
-      let wishlist = JSON.parse(localStorage.getItem("wishlistItems")) || [];
+      // Save liked state for this user
+      localStorage.setItem(likedKey, JSON.stringify(updatedLiked));
+
+      // Load current wishlist for this user
+      let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
+
       if (!isLiked) {
-        if (!wishlist.find((item) => item.id === product.id)) wishlist.push(product);
+        if (!wishlist.find((item) => item.id === product.id))
+          wishlist.push(product);
         toast.success("Added to wishlist!");
       } else {
         wishlist = wishlist.filter((item) => item.id !== product.id);
         toast.info("Removed from wishlist!");
       }
-      localStorage.setItem("wishlistItems", JSON.stringify(wishlist));
+
+      // Save updated wishlist for this user
+      localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
 
       return updatedLiked;
     });
   };
 
-  // Add to cart
+  // ✅ Add to cart (per user)
   const handleAddToCart = (product) => {
-    const itemExist = cartItems.find((item) => item.id === product.id);
+    const existingCart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    const itemExist = existingCart.find((item) => item.id === product.id);
+    let updatedCart;
+
     if (!itemExist) {
-      setCartItems((prev) => [...prev, { ...product, quantity: 1 }]);
+      updatedCart = [...existingCart, { ...product, quantity: 1 }];
       toast.success("Product Added Successfully!");
     } else {
-      setCartItems((prev) =>
-        prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
+      updatedCart = existingCart.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
       );
       toast.info("Product Quantity Updated!");
     }
+
+    // Save cart to both localStorage and state
+    localStorage.setItem(cartKey, JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
   };
 
-  // Search products
+  // ✅ Search filter
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
@@ -70,16 +102,18 @@ const Collection = ({ cartItems, setCartItems }) => {
     setFiltered(filteredData);
   };
 
-  // Filter by category
+  // ✅ Category filter
   const handleFilters = (category) => {
     setActiveCategory(category);
     if (category === "All") setFiltered(data);
     else setFiltered(data.filter((item) => item.category === category));
   };
 
-  // Sort products
-  const sortByPriceHighToLow = () => setFiltered([...filtered].sort((a, b) => b.price - a.price));
-  const sortByPriceLowToHigh = () => setFiltered([...filtered].sort((a, b) => a.price - b.price));
+  // ✅ Sorting
+  const sortByPriceHighToLow = () =>
+    setFiltered([...filtered].sort((a, b) => b.price - a.price));
+  const sortByPriceLowToHigh = () =>
+    setFiltered([...filtered].sort((a, b) => a.price - b.price));
 
   return (
     <section className="font-poppins pb-10 min-h-screen relative">
@@ -161,14 +195,21 @@ const Collection = ({ cartItems, setCartItems }) => {
               {liked[product.id] ? (
                 <FaHeart size={20} className="text-red-500" />
               ) : (
-                <FaRegHeart size={20} className="text-gray-600 hover:text-red-400" />
+                <FaRegHeart
+                  size={20}
+                  className="text-gray-600 hover:text-red-400"
+                />
               )}
             </div>
 
             {/* Product Info */}
             <div className="text-center mt-2">
-              <h1 className="text-sm font-semibold mt-2 line-clamp-1">{product.title}</h1>
-              <p className="text-gray-500 text-xs mt-1 line-clamp-2">{product.description.slice(0, 50)}...</p>
+              <h1 className="text-sm font-semibold mt-2 line-clamp-1">
+                {product.title}
+              </h1>
+              <p className="text-gray-500 text-xs mt-1 line-clamp-2">
+                {product.description.slice(0, 50)}...
+              </p>
               <p className="text-gray-800 font-bold mt-2">${product.price}</p>
             </div>
 

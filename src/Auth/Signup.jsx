@@ -31,7 +31,7 @@ export default function Signup() {
     localStorage.setItem("activeUser", JSON.stringify(newUser));
 
     toast.success("Signup successful");
-    navigate("/collection");
+    navigate("/login");
   };
 
   return (

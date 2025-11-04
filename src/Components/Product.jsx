@@ -83,7 +83,7 @@ const Product = () => {
               to="/collection"
               className="px-4 py-2 rounded-full border border-gray-300 bg-white hover:bg-gray-100 hover:scale-105 transition-all text-sm"
             >
-              →
+              &#8680;
             </Link>
           </li>
         </ul>

@@ -256,7 +256,7 @@
   {
     "id": 22,
     "title": "Casual-Pants",
-    "price": 109.95,
+    "price": 100.00,
     "description": "Casual wear is comfortable, informal clothing suitable for relaxed settings like everyday errands or leisure activities.",
     "category": "Men",
     "image": "/Casual Suit Pants.jpg",
@@ -268,7 +268,7 @@
   {
     "id": 23,
     "title": "Cotton Linean Shirts",
-    "price": 109.95,
+    "price": 198.00,
     "description": " Linen shirts are well known for high durability.",
     "category": "Men",
     "image": "/Cotton Linen Shirts.jpg",
@@ -280,7 +280,7 @@
   {
     "id": 24,
     "title": "Denim Jeans Pants",
-    "price": 109.95,
+    "price": 123.00,
     "description": "Denim is a sturdy cotton twill fabric woven with an indigo, gray, or mottled white yarn.",
     "category": "All",
     "image": "/Denim Jeans Pants.jpg",
@@ -292,7 +292,7 @@
   {
     "id": 25,
     "title": "Herren Sommer T-Shirt mit",
-    "price": 109.95,
+    "price": 96.00,
     "description": "T-shirts are typically made of cotton textile in a stockinette or jersey knit, which has a distinctively pliable texture compared to shirts made of woven cloth",
     "category": "Men",
     "image": "/Herren Sommer T-Shirt mit.jpg",

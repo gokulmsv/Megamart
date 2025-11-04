@@ -60,7 +60,6 @@ const Header = ({ cartItems }) => {
           <HashLink smooth to="/#contact">
             Contact
           </HashLink>
-          <Link to="/collection">Collection</Link>
         </div>
 
         {/* Icons + Auth Section */}

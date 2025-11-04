@@ -64,14 +64,7 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
             Contact
           </HashLink>
 
-          {/* Multi-Page Navigation */}
-          <Link
-            to="/collection"
-            onClick={() => setMenuOpen(false)}
-            className="hover:text-blue-600"
-          >
-            Collection
-          </Link>
+        
         </motion.div>
       )}
     </>

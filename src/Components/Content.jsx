@@ -34,7 +34,7 @@ const Content = () => {
           </div>
 
           {/* RIGHT SIDE IMAGE */}
-          <img className="w-32 h-48 rounded-xl object-cover" src={Men} alt="" />
+          <img className="w-32 h-48 rounded-xl object-center" src={Men} alt="" />
         </div>
 
         <div className="bg-gray-800 w-full gap-1 h-56 text-white flex items-center justify-between px-3">

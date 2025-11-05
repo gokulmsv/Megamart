@@ -19,8 +19,8 @@ const Slider = () => {
         {isToggled ? (
           
           <div className="relative">
-            <img src={slider1} className="w-[90%] h-[200px] pl-10 lg:w-[50%] lg:mx-80 lg:p-2 lg:h-[300px]" alt="" />
-            <p className="absolute right-14 top-34 text-3xl font-bold text-red-500 md:absolute md:right-28 lg:right-2/6 lg:my-20">50% offer</p>
+            <img src={slider1} className="w-[90%] h-[200px] pl-10 lg:w-[70%] lg:mx-36 lg:p-2 lg:h-[300px]" alt="" />
+            <p className="absolute right-14 top-34 text-3xl font-bold text-red-500 md:absolute  md:right-28 lg:right-52 lg:my-20 xl:absolute xl:right-96 xl:my-20">50% offer</p>
           </div>
           
         ) : (
@@ -28,10 +28,10 @@ const Slider = () => {
             <img
               src={isToggled ? slider1 : slider}
               alt="slider"
-              className="w-full h-[200px] bg-cover my-2 lg:w-[80%] lg:h-[250px] lg:pl-56"
+              className="w-full h-[200px] bg-cover my-2 md:w-[80%] lg:w-[100%] lg:h-[250px] xl:h-[300px]"
             />
 
-            <div className="absolute top-10 text-white pl-2 text-l md:absolute md:left-14 lg:absolute lg:left-72 lg:text-2xl">
+            <div className="absolute top-10 text-white pl-2 text-l xl:top-20 md:absolute md:left-14 lg:absolute lg:left-20 lg:text-2xl">
               <h1 className="text-sky-400">MEN'S</h1>
               <span>FASHION</span>
               <p>New Collections</p>
@@ -40,7 +40,7 @@ const Slider = () => {
                 SHOP NOW
               </button>
             </div>
-            <div className="absolute right-1.5 top-10 text-white pl-2 text-l md:absolute md:right-14 lg:absolute lg:right-[350px] lg:text-2xl">
+            <div className="absolute right-1.5 top-10 text-white pl-2 xl:top-20  text-l md:absolute md:right-14 lg:absolute lg:right-20 lg:text-2xl">
               <h1 className="text-pink-400">WOMEN'S</h1>
               <span>FASHION</span>
               <p>New Collections</p>

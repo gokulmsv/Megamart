@@ -2,8 +2,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import signupimg from "../assets/s-1.jpg";
-import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -20,18 +21,21 @@ export default function Signup() {
       return;
     }
 
-    // ✅ Generate unique user ID
-    const userId = uuidv4();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-    // ✅ Store user data
-    const newUser = { id: userId, name, email, password };
-    localStorage.setItem(email, JSON.stringify(newUser));
+      // ✅ Add display name to Firebase user profile
+      await updateProfile(userCredential.user, { displayName: name });
 
-    // ✅ Also mark as active user
-    localStorage.setItem("activeUser", JSON.stringify(newUser));
-
-    toast.success("Signup successful");
-    navigate("/login");
+      toast.success("Signup successful");
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

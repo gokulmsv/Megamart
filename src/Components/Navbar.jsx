@@ -63,8 +63,13 @@ const Navbar = ({ menuOpen, setMenuOpen }) => {
           >
             Contact
           </HashLink>
-
-        
+          <Link
+            to="/login"
+            onClick={() => setMenuOpen(false)}
+            className="hover:text-blue-600"
+          >
+            Login
+          </Link>
         </motion.div>
       )}
     </>

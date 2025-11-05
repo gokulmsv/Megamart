@@ -1,7 +1,11 @@
+// src/pages/Collection.jsx
 import React, { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
+
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Collection = ({ cartItems, setCartItems }) => {
   const [data, setData] = useState([]);
@@ -9,25 +13,32 @@ const Collection = ({ cartItems, setCartItems }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [liked, setLiked] = useState({});
+  const [activeUser, setActiveUser] = useState(null);
 
-  // ✅ Get current active user
-  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
-  const userId = activeUser?.id;
+  // ✅ Firebase user listener
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setActiveUser(user);
+    });
+    return () => unsub();
+  }, []);
 
-  // ✅ Use user-specific storage keys
+  const userId = activeUser?.uid;
   const wishlistKey = `${userId}_wishlist`;
   const cartKey = `${userId}_cart`;
   const likedKey = `${userId}_likedProducts`;
 
-  // ✅ Load user data from localStorage when component mounts
+  // ✅ load wishlist, cart, liked from storage
   useEffect(() => {
+    if (!userId) return;
+
     const savedWishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
     const savedCart = JSON.parse(localStorage.getItem(cartKey)) || [];
     const savedLiked = JSON.parse(localStorage.getItem(likedKey)) || {};
 
     setCartItems(savedCart);
     setLiked(savedLiked);
-  }, [userId]); // reload if user changes
+  }, [userId]);
 
   // ✅ Fetch products from backend
   useEffect(() => {
@@ -40,16 +51,20 @@ const Collection = ({ cartItems, setCartItems }) => {
       });
   }, []);
 
-  // ✅ Toggle wishlist (like/unlike)
+  // ✅ Toggle wishlist
   const toggleLike = (product) => {
+    if (!activeUser) {
+      toast.info("Please login first.");
+      return;
+    }
+
     setLiked((prevLiked) => {
       const isLiked = !!prevLiked[product.id];
       const updatedLiked = { ...prevLiked, [product.id]: !isLiked };
 
-      // Save liked state for this user
       localStorage.setItem(likedKey, JSON.stringify(updatedLiked));
 
-      // Load current wishlist for this user
+      // update wishlist storage
       let wishlist = JSON.parse(localStorage.getItem(wishlistKey)) || [];
 
       if (!isLiked) {
@@ -61,15 +76,18 @@ const Collection = ({ cartItems, setCartItems }) => {
         toast.info("Removed from wishlist!");
       }
 
-      // Save updated wishlist for this user
       localStorage.setItem(wishlistKey, JSON.stringify(wishlist));
-
       return updatedLiked;
     });
   };
 
-  // ✅ Add to cart (per user)
+  // ✅ Add to cart
   const handleAddToCart = (product) => {
+    if (!userId) {
+      toast.info("Please login first.");
+      return;
+    }
+
     const existingCart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
     const itemExist = existingCart.find((item) => item.id === product.id);
@@ -80,19 +98,16 @@ const Collection = ({ cartItems, setCartItems }) => {
       toast.success("Product Added Successfully!");
     } else {
       updatedCart = existingCart.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       toast.info("Product Quantity Updated!");
     }
 
-    // Save cart to both localStorage and state
     localStorage.setItem(cartKey, JSON.stringify(updatedCart));
     setCartItems(updatedCart);
   };
 
-  // ✅ Search filter
+  // ✅ search
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
@@ -102,14 +117,14 @@ const Collection = ({ cartItems, setCartItems }) => {
     setFiltered(filteredData);
   };
 
-  // ✅ Category filter
+  // ✅ filter category
   const handleFilters = (category) => {
     setActiveCategory(category);
     if (category === "All") setFiltered(data);
     else setFiltered(data.filter((item) => item.category === category));
   };
 
-  // ✅ Sorting
+  // sort
   const sortByPriceHighToLow = () =>
     setFiltered([...filtered].sort((a, b) => b.price - a.price));
   const sortByPriceLowToHigh = () =>

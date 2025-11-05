@@ -81,7 +81,7 @@ const Product = () => {
           <li>
             <Link
               to="/collection"
-              className="px-4 py-2 text-2xl rounded-full border border-gray-300 bg-white hover:bg-gray-100 hover:scale-105 transition-all "
+              className="px-4 py-2 text-xl rounded-full border border-gray-300 bg-white hover:bg-gray-100 hover:scale-105 transition-all "
             >
               &#8680;
             </Link>

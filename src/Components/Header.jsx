@@ -6,32 +6,25 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { FaHeart } from "react-icons/fa";
 
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+
 const Header = ({ cartItems }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeUser, setActiveUser] = useState(null); // track active user
+  const [activeUser, setActiveUser] = useState(null);
   const navigate = useNavigate();
 
-  // Load activeUser from localStorage
+  // Listen firebase auth user state
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("activeUser"));
-    setActiveUser(user);
-  }, []);
-
-  // Update activeUser when login/logout happens
-  useEffect(() => {
-    const updateUser = () => {
-      const user = JSON.parse(localStorage.getItem("activeUser"));
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       setActiveUser(user);
-    };
+    });
 
-    window.addEventListener("userChanged", updateUser);
-    return () => window.removeEventListener("userChanged", updateUser);
+    return () => unsubscribe();
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("activeUser");
-    setActiveUser(null); // update state immediately
-    window.dispatchEvent(new Event("userChanged")); // notify other components
+  const handleLogout = async () => {
+    await signOut(auth);
     navigate("/login");
   };
 
@@ -79,7 +72,7 @@ const Header = ({ cartItems }) => {
           {activeUser ? (
             <div className="flex items-center gap-3">
               <span className="text-sm font-medium text-gray-800">
-                {activeUser.name}
+                {activeUser.displayName || activeUser.email}
               </span>
               <button
                 onClick={handleLogout}

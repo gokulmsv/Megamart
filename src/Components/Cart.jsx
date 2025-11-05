@@ -1,11 +1,10 @@
+// src/pages/Cart.jsx
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
-/**
- * Per-user Cart with localStorage persistence.
- */
 const Cart = ({ cartItems, setCartItems }) => {
-  // helper to read id/title/image/price/quantity from either shape
   const getField = (item, key) => {
     if (item == null) return undefined;
     if (item[key] !== undefined) return item[key];
@@ -13,28 +12,43 @@ const Cart = ({ cartItems, setCartItems }) => {
     return undefined;
   };
 
-  // 🧠 Get current active user
-  const activeUser = JSON.parse(localStorage.getItem("activeUser"));
-  const userId = activeUser?.id;
+  const [activeUser, setActiveUser] = useState(null);
+  const [userCart, setUserCart] = useState([]);
 
-  // 🧠 Create unique storage key for this user
-  const cartKey = `${userId}_cart`;
-
-  // 🧠 Load cart from user-specific storage
-  const [userCart, setUserCart] = useState(() => {
-    const saved = JSON.parse(localStorage.getItem(cartKey));
-    return saved || [];
-  });
-
-  // 🧠 Keep both local state and parent state synced
+  // get firebase user
   useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setActiveUser(user);
+    });
+    return () => unsub();
+  }, []);
+
+  const userId = activeUser?.uid;
+  const cartKey = userId ? `${userId}_cart` : null;
+
+  // load cart when user available
+  useEffect(() => {
+    if (!userId) return;
+    const saved = JSON.parse(localStorage.getItem(cartKey)) || [];
+    setUserCart(saved);
+  }, [userId]);
+
+  // sync userCart → parent + storage
+  useEffect(() => {
+    if (!userId) return;
     setCartItems(userCart);
     localStorage.setItem(cartKey, JSON.stringify(userCart));
   }, [userCart]);
 
-  // helper to get canonical id
+  if (!activeUser) {
+    return <h2 className="text-center mt-10">Please login to see your cart.</h2>;
+  }
+
   const getId = (item) =>
-    getField(item, "id") ?? getField(item, "_id") ?? getField(item, "sku") ?? "";
+    getField(item, "id") ??
+    getField(item, "_id") ??
+    getField(item, "sku") ??
+    "";
 
   const handleRemove = (targetId) => {
     setUserCart((items) => items.filter((item) => getId(item) !== targetId));
@@ -110,6 +124,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                         "https://via.placeholder.com/80?text=No+Image";
                     }}
                   />
+
                   <div className="flex-1">
                     <h3 className="font-semibold text-sm leading-5 line-clamp-2">
                       {title}

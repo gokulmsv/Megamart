@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,24 +14,12 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const user = JSON.parse(localStorage.getItem(email));
-
-    if (user && user.password === password) {
-      const activeUser = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        sessionId: uuidv4(),
-      };
-      localStorage.setItem("activeUser", JSON.stringify(activeUser));
-
-      // Trigger a custom event to notify Header
-      window.dispatchEvent(new Event("userChanged"));
-
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login Successful!");
       navigate("/collection");
-    } else {
-      toast.error("Invalid Credentials");
+    } catch (error) {
+      toast.error("Invalid Email or Password");
     }
   };
 

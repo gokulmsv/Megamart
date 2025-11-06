@@ -11,7 +11,11 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setActiveUser(user);
-      setChecking(false);
+
+      // ADD delay here
+      setTimeout(() => {
+        setChecking(false);
+      }, 2000); // 1500 ms = 1.5 seconds
     });
 
     return () => unsub();
@@ -21,9 +25,7 @@ export default function ProtectedRoute({ children }) {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-white">
         <Mosaic color="#00786F" size="medium" />
-        <p className="mt-4 text-lg font-semibold text-blue-600">
-          Loading...
-        </p>
+        <p className="mt-4 text-lg font-semibold text-blue-600">Loading...</p>
       </div>
     );
   }

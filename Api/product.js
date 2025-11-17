@@ -1,4 +1,4 @@
-const data = {
+const data ={
   "products": [
   {
     "id": 1,
@@ -303,3 +303,8 @@ const data = {
   }
 ]
 }
+
+// must export like this for Vercel API
+module.exports = (req, res) => {
+  res.status(200).json(data);
+};

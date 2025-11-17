@@ -42,14 +42,17 @@ const Collection = ({ cartItems, setCartItems }) => {
 
   // ✅ Fetch products from backend
   useEffect(() => {
-    fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((data) => {
-        const products = data.products || data;
-        setData(products);
-        setFiltered(products);
-      });
-  }, []);
+  fetch("/api/products")
+    .then((res) => res.json())
+    .then((data) => {
+      const products = data.products || data;
+      setData(products);
+      setFiltered(products);
+    })
+    .catch((err) => {
+      console.error("Error fetching products:", err);
+    });
+}, []);
 
   // ✅ Toggle wishlist
   const toggleLike = (product) => {

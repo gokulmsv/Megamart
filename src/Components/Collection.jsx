@@ -42,7 +42,7 @@ const Collection = ({ cartItems, setCartItems }) => {
 
   // ✅ Fetch products from backend
   useEffect(() => {
-  fetch("/api/products")
+  fetch("/Api/products")
     .then((res) => res.json())
     .then((data) => {
       const products = data.products || data;

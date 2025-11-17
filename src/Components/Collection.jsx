@@ -42,7 +42,7 @@ const Collection = ({ cartItems, setCartItems }) => {
 
   // ✅ Fetch products from backend
   useEffect(() => {
-  fetch("/Api/products")
+  fetch("https://raw.githubusercontent.com/gokulmsv/Megamart/refs/heads/main/data/db.json")
     .then((res) => res.json())
     .then((data) => {
       const products = data.products || data;
